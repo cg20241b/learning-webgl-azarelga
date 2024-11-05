@@ -2,6 +2,8 @@ let gl;
 let program;
 let rotation = 0;
 let isPaused = false;
+let position = [0.0, 0.0, -3.0];
+let velocity = [0.01, 0.01, 0.0];
 
 // Initialize WebGL context
 function initGL() {
@@ -157,7 +159,7 @@ function render() {
         mat4.perspective(projectionMatrix, 45 * Math.PI / 180, gl.canvas.width / gl.canvas.height, 0.1, 100.0);
 
         const modelViewMatrix = mat4.create();
-        mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -6.0]);
+        mat4.translate(modelViewMatrix, modelViewMatrix, position);
         mat4.rotate(modelViewMatrix, modelViewMatrix, rotation, [1, 1, 0]);
 
         // Use program and set uniforms
@@ -182,6 +184,18 @@ function render() {
         gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0);
 
         rotation += 0.01;
+
+        // Update position based on velocity
+        position[0] += velocity[0];
+        position[1] += velocity[1];
+
+        // Check for collisions with canvas boundaries and bounce
+        if (position[0] > 2.0 || position[0] < -2.0) {
+            velocity[0] = -velocity[0];
+        }
+        if (position[1] > 2.0 || position[1] < -2.0) {
+            velocity[1] = -velocity[1];
+        }
     }
     requestAnimationFrame(render);
 }
