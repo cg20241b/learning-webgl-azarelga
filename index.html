@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebGL Rotating Cube</title>
+    <title>WebGL Bouncing Cube</title>
     <style>
-        body { margin: 0; }
-        canvas { display: block; }
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 20px auto;
+        }
+        #controls {
+            text-align: center;
+            margin: 10px;
+            font-family: Arial, sans-serif;
+        }
     </style>
 </head>
 <body>
     <canvas id="glCanvas" width="640" height="480"></canvas>
+    <div id="controls">Press SPACE to pause/resume animation</div>
+    <script src="shaders.js"></script>
     <script src="main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
 </body>
 </html>
